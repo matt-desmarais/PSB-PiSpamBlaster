@@ -30,4 +30,6 @@ Add names to blocklist:<br/>
 Autorun at boot<br/>
 run crontab -e<br/>
 add next line to end of file<br/>
-@reboot sudo python /home/pi/PSB-PiSpamBlaster/blockwithblocklist.py 
+@reboot sudo python /home/pi/PSB-PiSpamBlaster/blockwithblocklist.py<br/>
+if usinging PiOled then use this next line instead<br/>
+@reboot sudo python /home/pi/PSB-PiSpamBlaster/blockwithblocklistoled.py<br/>
