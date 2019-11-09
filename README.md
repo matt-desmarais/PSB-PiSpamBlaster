@@ -18,14 +18,14 @@ Software to install:<br/>
     sudo apt-get install python-pip git<br/>
     sudo pip install pyserial<br/>
 
+Clone code:<br/>
+    git clone https://github.com/matt-desmarais/PSB-PiSpamBlaster.git<br/>
+
 optional software for Oled<br/>
     sudo apt-get install python-pil python-smbus<br/>
     git clone https://github.com/adafruit/Adafruit_Python_SSD1306.git<br/>
     cd Adafruit_Python_SSD1306<br/>
     sudo python setup.py install<br/>
-
-Clone code:<br/>
-    git clone https://github.com/matt-desmarais/PSB-PiSpamBlaster.git<br/>
     
 Add numbers to blocklist:<br/>
     /home/pi/blockedNumbers.txt<br/>
