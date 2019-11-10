@@ -17,6 +17,9 @@ Operating System:<br/>
 Software to install:<br/>
     sudo apt-get install python-pip git<br/>
     sudo pip install pyserial<br/>
+    git clone https://github.com/simonmonk/squid.git<br/>
+    cd squid<br/>
+    sudo python setup.py install<br/>
 
 Clone code:<br/>
     git clone https://github.com/matt-desmarais/PSB-PiSpamBlaster.git<br/>
