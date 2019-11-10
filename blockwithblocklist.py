@@ -52,7 +52,8 @@ def loadBlocklist():
     global numberList
     #if number block list exists load it
     if(os.path.isfile(numbers)):
-        numberList = [line.rstrip('\r\n') for line in open(numbers)]
+        numberList = [line.rstrip(' \r\n') for line in open(numbers)]
+        numberList = filter(None, numberList)
 
 loadBlocklists()
 
