@@ -38,12 +38,12 @@ def loadBlocklists():
     global nameList
     #if number block list exists load it
     if(os.path.isfile(numbers)):
-        numberList = [line.rstrip('\r\n') for line in open(numbers)]
+        numberList = [line.rstrip(' \r\n') for line in open(numbers)]
         numberList = filter(None, numberList)
         print("Blocked Numbers: "+str(numberList))
     #if name block list exist load it
     if(os.path.isfile(names)):
-        nameList = [line.rstrip('\r\n') for line in open(names)]
+        nameList = [line.rstrip(' \r\n') for line in open(names)]
         nameList = filter(None, nameList)
         print("Blocked names: "+str(nameList))
 
