@@ -1,5 +1,9 @@
 # PSB-PiSpamBlaster
-Telephone spam silencer based on caller id
+Telephone spam silencer based on caller id. My service provider (Verizon) prefixes the caller id of smap calls with SPAM?.
+I also block calls with blocked called IDs. The calls are answered by the modem which makes loud tones for 12 seconds.
+There are 2 blocklists files that you can put numbers/names in to be blocked. The numbers file can be added to by pressing
+the the button attached to pin 26 to block the last incoming phone number, the name will not be blocked. 
+The RGB LED is wired to [GND][16][20][21] - [GND][R][G][B]. the button is attached to GND and pin 26. The oled fits on at the top of the header.
 
 Parts:<br/>
     Pi Zero W<br/>
