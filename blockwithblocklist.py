@@ -61,7 +61,7 @@ loadBlocklists()
 def button_block(channel):
     rgb.set_color(BLUE)
     if(number != None):
-        with open("/home/pi/blockedNumbers.txt", "a") as numbersOutput:
+        with open(numbers, "a") as numbersOutput:
             numbersOutput.write(number)
         loadBlocklist()
         time.sleep(1)
