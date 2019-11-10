@@ -30,6 +30,7 @@ names = "/home/pi/blockedNames.txt"
 number = None
 numberList = []
 nameList = []
+blockedLast = False
 
 #func to load name/number blocklists
 def loadBlocklists():
@@ -77,15 +78,18 @@ while True:
             if(len(str(line)) != 1):
                 modemOutput.write(str(line))
                 print(line)
-        #if phone rings turn led green
-        #if("RING" in str(line)):
-            #turn led green
-            #rgb.set_color(GREEN)
         #store last number (to be blocked by button press)
         if("NMBR = " in str(line)):
-            number  = str(line)[7:]
+            number  = str(line)[7:].rstrip('\r\n')
+        if("NAME = " in str(line)):
+            name  = str(line)[7:].rstrip('\r\n')
+        if(blockedLast):
+            with open("blockedCalls.txt", "a") as blockedCalls:
+                blockedCalls.write(str(number)+" - "+str(name)+"\n")
+            blockedLast = False
         #check for spam call or blocked caller id, also blocks numbers/names in textfiles
         if("NAME = SPAM?" in str(line) or "NMBR = P" in str(line) or str(line)[7:].rstrip('\r\n') in numberList or str(line)[7:].rstrip('\r\n') in nameList):
+            blockedLast = True
             #turn led red
             rgb.set_color(RED)
             #answer call
