@@ -19,7 +19,9 @@ while True:
         #get serial input
         line = ser.readline()
         with open("modemOuput.txt", "a") as modemOutput:
-            modemOutput.write(str(line)+'|')
+            if(len(str(line)) != 1):
+                modemOutput.write(str(line))
+                print(line)
         print(line)
         #check for spam call or blocked caller id
         if("NAME = SPAM?" in str(line) or "NMBR = P" in str(line)):
