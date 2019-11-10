@@ -68,6 +68,7 @@ name = ""
 numberList = []
 nameList = []
 status = "waiting for call"
+blockedLast = False
 
 def drawScreen():
     draw.rectangle((0,0,width,height), outline=0, fill=0)
@@ -91,7 +92,7 @@ def loadBlocklists():
         print("Blocked Numbers: "+str(numberList))
     #if name block list exist load it
     if(os.path.isfile(names)):
-        nameList = [line.rstrip(' \r\n') for line in open(names)]
+        nameList = [line.rstrip(' \r\n').lower() for line in open(names)]
         nameList = filter(None, nameList)
         print("Blocked names: "+str(nameList))
 
@@ -110,7 +111,7 @@ def button_block(channel):
     global status
     rgb.set_color(BLUE)
     if(number != None):
-        with open("blockedNumbers.txt", "a") as numbersOutput:
+        with open("/home/pi/blockedNumbers.txt", "a") as numbersOutput:
             numbersOutput.write(number+"\n")
         status = "Last Caller Blocked!"
         drawScreen()
@@ -128,7 +129,7 @@ while True:
         #get serial input
         line = ser.readline()
         #write modem output to file
-        with open("modemOuput.txt", "a") as modemOutput:
+        with open("/home/pi/modemOuput.txt", "a") as modemOutput:
             if(len(str(line)) != 1):
                 modemOutput.write(str(line))
                 print(line)
@@ -146,8 +147,13 @@ while True:
             name  = str(line)[7:].rstrip('\r\n')
             disp.clear()
             print(name)
+        if(blockedLast):
+            with open("/home/pi/blockedCalls.txt", "a") as blockedCalls:
+                blockedCalls.write(str(number)+" - "+str(name)+"\n")
+            blockedLast = False
         #check for spam call or blocked caller id, also blocks numbers/names in textfiles
-        if("NAME = SPAM?" in str(line) or "NMBR = P" in str(line) or str(line)[7:].rstrip('\r\n') in numberList or str(line)[7:].rstrip('\r\n') in nameList):
+        if("NAME = SPAM?" in str(line) or "NMBR = P" in str(line) or str(line)[7:].rstrip('\r\n') in numberList or str(line)[7:].rstrip('\r\n').lower() in nameList):
+            blockedLast = True
             status = "LAST CALL BLOCKED!"
             drawScreen()
             #turn led red

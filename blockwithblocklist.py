@@ -43,7 +43,7 @@ def loadBlocklists():
         print("Blocked Numbers: "+str(numberList))
     #if name block list exist load it
     if(os.path.isfile(names)):
-        nameList = [line.rstrip(' \r\n') for line in open(names)]
+        nameList = [line.rstrip(' \r\n').lower() for line in open(names)]
         nameList = filter(None, nameList)
         print("Blocked names: "+str(nameList))
 
@@ -61,7 +61,7 @@ loadBlocklists()
 def button_block(channel):
     rgb.set_color(BLUE)
     if(number != None):
-        with open("blockedNumbers.txt", "a") as numbersOutput:
+        with open("/home/pi/blockedNumbers.txt", "a") as numbersOutput:
             numbersOutput.write(number)
         loadBlocklist()
         time.sleep(1)
@@ -75,7 +75,7 @@ while True:
         #get serial input
         line = ser.readline()
         #write modem output to file
-        with open("modemOuput.txt", "a") as modemOutput:
+        with open("/home/pi/modemOuput.txt", "a") as modemOutput:
             if(len(str(line)) != 1):
                 modemOutput.write(str(line))
                 print(line)
@@ -85,11 +85,11 @@ while True:
         if("NAME = " in str(line)):
             name  = str(line)[7:].rstrip('\r\n')
         if(blockedLast):
-            with open("blockedCalls.txt", "a") as blockedCalls:
+            with open("/home/pi/blockedCalls.txt", "a") as blockedCalls:
                 blockedCalls.write(str(number)+" - "+str(name)+"\n")
             blockedLast = False
         #check for spam call or blocked caller id, also blocks numbers/names in textfiles
-        if("NAME = SPAM?" in str(line) or "NMBR = P" in str(line) or str(line)[7:].rstrip('\r\n') in numberList or str(line)[7:].rstrip('\r\n') in nameList):
+        if("NAME = SPAM?" in str(line) or "NMBR = P" in str(line) or str(line)[7:].rstrip('\r\n') in numberList or str(line)[7:].rstrip('\r\n').lower() in nameList):
             blockedLast = True
             #turn led red
             rgb.set_color(RED)
