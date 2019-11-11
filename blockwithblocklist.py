@@ -79,6 +79,11 @@ while True:
             if(len(str(line)) != 1):
                 modemOutput.write(str(line))
                 print(line)
+        #get date and time
+        if("DATE = " in str(line)):
+            date  = str(line)[7:].rstrip('\r\n')
+        if("TIME = " in str(line)):
+            timeofcall  = str(line)[7:].rstrip('\r\n')
         #store last number (to be blocked by button press)
         if("NMBR = " in str(line)):
             number  = str(line)[7:].rstrip('\r\n')
@@ -86,7 +91,7 @@ while True:
             name  = str(line)[7:].rstrip('\r\n')
         if(blockedLast):
             with open("/home/pi/blockedCalls.txt", "a") as blockedCalls:
-                blockedCalls.write(str(number)+" - "+str(name)+"\n")
+                blockedCalls.write(str(date)+" - "+str(timeofcall)+" - "+str(number)+" - "+str(name)+"\n")
             blockedLast = False
         #check for spam call or blocked caller id, also blocks numbers/names in textfiles
         if("NAME = SPAM?" in str(line) or "NMBR = P" in str(line) or str(line)[7:].rstrip('\r\n') in numberList or str(line)[7:].rstrip('\r\n').lower() in nameList):
