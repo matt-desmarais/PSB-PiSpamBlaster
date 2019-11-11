@@ -104,7 +104,7 @@ while True:
             #hangup
             ser.write('ATH0'+'\r\n')
             #flush serial
-            ser.flushInput()
+            #ser.flushInput()
     except KeyboardInterrupt:
         print("Keyboard Interrupt")
         break
