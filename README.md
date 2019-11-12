@@ -1,5 +1,5 @@
 # PSB-PiSpamBlaster
-Telephone spam silencer based on caller id. My service provider (Verizon) prefixes the caller id of smap calls with SPAM?.
+Telephone spam silencer based on caller id. My service provider [Verizon](https://www.verizon.com/about/news/block-spam-robocalls-with-verizon-new-tool) prefixes the caller id of spam calls with SPAM?.
 I also block calls with blocked called IDs. The calls are answered by the modem which makes loud tones for 12 seconds.
 There are 2 blocklists files that you can put numbers/names in to be blocked. The numbers file can be added to by pressing
 the the button attached to pin 26 to block the last incoming phone number, the name will not be blocked. 
